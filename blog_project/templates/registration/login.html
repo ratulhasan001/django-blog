@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<div class="mx-auto" style="max-width: 420px">
+  <h1 class="h3 mb-3">Log in</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="hidden" name="next" value="{{ next }}" />
+    <button type="submit" class="btn btn-primary">Log in</button>
+  </form>
+  <p class="text-muted small mt-3">Accounts are created with <code>python manage.py createsuperuser</code> or in the admin.</p>
+</div>
+{% endblock %}
