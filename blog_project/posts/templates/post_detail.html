@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<article class="mx-auto" style="max-width: 720px">
+  <a href="{% url 'homepage' %}" class="small">&larr; All posts</a>
+  <h1 class="mt-2">{{ post.title }}</h1>
+  <p class="text-muted">By {{ post.author.name }}</p>
+  <div class="mb-3">
+    {% for cat in post.category.all %}
+    <a href="{% url 'homepage' %}?category={{ cat.id }}" class="badge text-bg-dark text-decoration-none">{{ cat.name }}</a>
+    {% endfor %}
+  </div>
+  <div class="mb-4">{{ post.content|linebreaks }}</div>
+  {% if user.is_authenticated %}
+  <a href="{% url 'edit_post' post.id %}" class="btn btn-warning">Edit</a>
+  <a href="{% url 'delete_post' post.id %}" class="btn btn-danger">Delete</a>
+  {% endif %}
+</article>
+{% endblock %}
